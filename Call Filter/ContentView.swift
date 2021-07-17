@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-	@State var isLookup = false
+	
+	@State var isLookup = true
 	
 	var body: some View {
 		VStack {
