@@ -9,9 +9,7 @@ import Foundation
 
 class DbUpdateViewModel: ObservableObject {
 	
-	@Published var updateCounter: Double = 0
-	
-	private var isUpdating = false
+	@Published var isUpdating = false
 	
 	func updateDb() {
 		
@@ -19,18 +17,15 @@ class DbUpdateViewModel: ObservableObject {
 			print("Update already started, ignoring this request..")
 			return
 		}
+		
 		isUpdating = true
 		
 		// do db update here
 		// like fetching data from api and storing in core data..
 		DispatchQueue.global(qos: .userInitiated).async {
-			for _ in 0..<10000 {
-				DispatchQueue.main.async {
-					self.updateCounter += 20
-				}
+			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+				self.isUpdating = false
 			}
-			self.isUpdating = false
 		}
 	}
-	
 }

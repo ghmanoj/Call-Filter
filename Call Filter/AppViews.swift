@@ -10,7 +10,14 @@ import SwiftUI
 
 struct UpdateFilterDbCard: View {
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
-	@StateObject var viewModel = DbUpdateViewModel()
+	@EnvironmentObject var viewModel: DbUpdateViewModel
+	
+	@State var viewShowing = false
+	
+	var foreverAnimation: Animation {
+		Animation.linear(duration: 0.5)
+			.repeatForever(autoreverses: false)
+	}
 	
 	@State var updatingImage = "sun.min"
 	
@@ -23,9 +30,16 @@ struct UpdateFilterDbCard: View {
 				
 				Image(systemName: updatingImage)
 					.foregroundColor(.red)
-					.rotationEffect(.degrees(viewModel.updateCounter))
+					.rotationEffect(.degrees( (viewModel.isUpdating && viewShowing) ? 360 : 0 ))
+					.animation((viewModel.isUpdating && viewShowing) ? foreverAnimation : .default)
 					.font(.title)
 					.padding(.horizontal, 1)
+					.onAppear {
+						self.viewShowing = true
+					}
+					.onDisappear {
+						self.viewShowing = false
+					}
 				
 				Text("Database")
 					.font(.system(size: 25))
@@ -56,9 +70,9 @@ struct UpdateFilterDbCard: View {
 
 
 struct ActionsStatisticsView: View {
-	@StateObject var viewModel = StatisticsViewModel()
 	
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
+	@EnvironmentObject var viewModel: StatisticsViewModel
 	
 	var body: some View {
 		VStack(alignment: .leading) {
@@ -110,10 +124,9 @@ struct ActionsStatisticsView: View {
 
 
 struct TopLocationStatisticsView: View {
-	@StateObject var viewModel = StatisticsViewModel()
-	
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
-	
+	@EnvironmentObject var viewModel: StatisticsViewModel
+
 	
 	var body: some View {
 		VStack(alignment: .leading) {
@@ -165,7 +178,7 @@ struct TopLocationStatisticsView: View {
 // Lookup View
 struct LookupView: View {
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
-	@StateObject var viewModel = LookupViewModel()
+	@EnvironmentObject var viewModel: LookupViewModel
 	
 	var body: some View {
 		VStack {
@@ -173,18 +186,18 @@ struct LookupView: View {
 			VStack {
 				HStack {
 					Image(systemName: "magnifyingglass")
-						.font(.title2)
+						.font(.title3)
 						.foregroundColor(.gray)
 						.padding(.trailing, 8)
 					
 					TextField("Search Phone Number", text: $viewModel.numberQuery)
 						.autocapitalization(.none)
 						.disableAutocorrection(true)
-						.font(.title)
+						.font(.title2)
 				}
-				.padding()
+				.padding([.horizontal, .vertical], 15)
 				.background(getBackground())
-				.cornerRadius(25)
+				.cornerRadius(30)
 				
 				VStack {
 					Text(viewModel.showPrompt ? "Formats: (123) 456-5678, 123-456 5678, 123 456 5678, 1234565678" : "")
@@ -194,7 +207,6 @@ struct LookupView: View {
 				}
 				.padding(.top, 3)
 				.frame(height: 100)
-				
 				
 			}
 			.padding()
