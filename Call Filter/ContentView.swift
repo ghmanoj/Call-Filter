@@ -26,7 +26,13 @@ struct ContentView: View {
 
 
 struct ContentView_Previews: PreviewProvider {
+	@StateObject static var dbUpdateViewModel = DbUpdateViewModel()
+	@StateObject static var statisticsViewModel = StatisticsViewModel()
+	@StateObject static var lookupViewModel = LookupViewModel()
+	
 	static var previews: some View {
 		ContentView()
-	}
+			.environmentObject(dbUpdateViewModel)
+			.environmentObject(statisticsViewModel)
+			.environmentObject(lookupViewModel)	}
 }
