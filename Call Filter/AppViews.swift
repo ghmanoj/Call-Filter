@@ -126,7 +126,7 @@ struct ActionsStatisticsView: View {
 struct TopLocationStatisticsView: View {
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
 	@EnvironmentObject var viewModel: StatisticsViewModel
-
+	
 	
 	var body: some View {
 		VStack(alignment: .leading) {
@@ -180,24 +180,50 @@ struct LookupView: View {
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
 	@EnvironmentObject var viewModel: LookupViewModel
 	
+	@State var searchFieldActive = false
+	
 	var body: some View {
 		VStack {
 			
 			VStack {
 				HStack {
-					Image(systemName: "magnifyingglass")
-						.font(.title3)
-						.foregroundColor(.gray)
-						.padding(.trailing, 8)
-					
-					TextField("Search Phone Number", text: $viewModel.numberQuery)
+					HStack {
+						Image(systemName: "magnifyingglass")
+							.font(.body)
+							.foregroundColor(.gray)
+							.padding(.trailing, 8)
+						
+						TextField("Search Phone Number", text: $viewModel.numberQuery, onEditingChanged: {focused in
+							if focused {
+								withAnimation {
+									self.searchFieldActive = true
+								}
+							}
+						})
 						.autocapitalization(.none)
 						.disableAutocorrection(true)
-						.font(.title2)
+						.font(.title3)
+						.keyboardType(.phonePad)
+					}
+					.padding([.horizontal, .vertical], 10)
+					.background(getBackground())
+					.cornerRadius(15)
+					
+					if searchFieldActive {
+						Button(action: {
+							withAnimation {
+								self.searchFieldActive = false
+							}
+							
+							UIApplication.shared.endEditing() // Call to dismiss keyboard
+						}) {
+							Text("Cancel")
+								.foregroundColor(searchFieldActive ? .primary : .secondary)
+								.font(.callout)
+								.padding(.leading, 5)
+						}
+					}
 				}
-				.padding([.horizontal, .vertical], 15)
-				.background(getBackground())
-				.cornerRadius(30)
 				
 				VStack {
 					Text(viewModel.showPrompt ? "Formats: (123) 456-5678, 123-456 5678, 123 456 5678, 1234565678" : "")
@@ -283,5 +309,15 @@ struct BottomBar: View {
 					.foregroundColor(isLookup ? .gray : .red)
 			}
 		}
+	}
+}
+
+
+
+// https://www.hackingwithswift.com/forums/swiftui/textfield-dismiss-keyboard-clear-button/240
+// extension for keyboard to dismiss
+extension UIApplication {
+	func endEditing() {
+		sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
 	}
 }
