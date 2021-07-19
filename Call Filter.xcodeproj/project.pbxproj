@@ -17,6 +17,8 @@
 		AF8CF006269FE11E00695129 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF8CF005269FE11E00695129 /* Assets.xcassets */; };
 		AF8CF009269FE11E00695129 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF8CF008269FE11E00695129 /* Preview Assets.xcassets */; };
 		AFA4CEA926A12C3B00752430 /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA4CEA826A12C3B00752430 /* ViewExt.swift */; };
+		AFC8571E26A4AD1C00C5F203 /* SpamDbApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8571D26A4AD1C00C5F203 /* SpamDbApiService.swift */; };
+		AFC8572526A4DADE00C5F203 /* SpamDbParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8572426A4DADE00C5F203 /* SpamDbParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		AF8CF008269FE11E00695129 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AF8CF00A269FE11E00695129 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFA4CEA826A12C3B00752430 /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
+		AFC8571D26A4AD1C00C5F203 /* SpamDbApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpamDbApiService.swift; sourceTree = "<group>"; };
+		AFC8572426A4DADE00C5F203 /* SpamDbParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpamDbParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,17 +68,14 @@
 		AF8CF000269FE11D00695129 /* Call Filter */ = {
 			isa = PBXGroup;
 			children = (
+				AFC8572226A4DA4E00C5F203 /* Data */,
+				AFC8572126A4D9E800C5F203 /* Features */,
+				AFC8572026A4D9E400C5F203 /* Api */,
+				AFC8571F26A4D9DF00C5F203 /* Utils */,
 				AF8CF001269FE11D00695129 /* CallFilterApp.swift */,
-				AF8CF003269FE11D00695129 /* ContentView.swift */,
 				AF8CF005269FE11E00695129 /* Assets.xcassets */,
 				AF8CF00A269FE11E00695129 /* Info.plist */,
 				AF8CF007269FE11E00695129 /* Preview Content */,
-				AFA4CEA826A12C3B00752430 /* ViewExt.swift */,
-				AF614B8826A2AB5D000D5ACA /* LookupViewModel.swift */,
-				AF614B8A26A2AB9E000D5ACA /* Models.swift */,
-				AF614B8C26A2ABCD000D5ACA /* AppViews.swift */,
-				AF614B8E26A2B637000D5ACA /* DbUpdateViewModel.swift */,
-				AF614B9026A2BB63000D5ACA /* StatisticsViewModel.swift */,
 			);
 			path = "Call Filter";
 			sourceTree = "<group>";
@@ -85,6 +86,43 @@
 				AF8CF008269FE11E00695129 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		AFC8571F26A4D9DF00C5F203 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				AFA4CEA826A12C3B00752430 /* ViewExt.swift */,
+				AFC8572426A4DADE00C5F203 /* SpamDbParser.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		AFC8572026A4D9E400C5F203 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				AFC8571D26A4AD1C00C5F203 /* SpamDbApiService.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		AFC8572126A4D9E800C5F203 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				AF8CF003269FE11D00695129 /* ContentView.swift */,
+				AF614B8826A2AB5D000D5ACA /* LookupViewModel.swift */,
+				AF614B8C26A2ABCD000D5ACA /* AppViews.swift */,
+				AF614B8E26A2B637000D5ACA /* DbUpdateViewModel.swift */,
+				AF614B9026A2BB63000D5ACA /* StatisticsViewModel.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		AFC8572226A4DA4E00C5F203 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				AF614B8A26A2AB9E000D5ACA /* Models.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,6 +196,8 @@
 			files = (
 				AF614B8D26A2ABCD000D5ACA /* AppViews.swift in Sources */,
 				AF614B8F26A2B637000D5ACA /* DbUpdateViewModel.swift in Sources */,
+				AFC8571E26A4AD1C00C5F203 /* SpamDbApiService.swift in Sources */,
+				AFC8572526A4DADE00C5F203 /* SpamDbParser.swift in Sources */,
 				AF614B8B26A2AB9E000D5ACA /* Models.swift in Sources */,
 				AF614B9126A2BB63000D5ACA /* StatisticsViewModel.swift in Sources */,
 				AF8CF004269FE11D00695129 /* ContentView.swift in Sources */,
