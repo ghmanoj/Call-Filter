@@ -10,8 +10,6 @@ import Foundation
 
 class SpamDbApiService {
 	private let apiUrl = "http://localhost:8081/latest_spamdb"
-//	private let apiUrl = "https://random-data-api.com/api/stripe/random_stripe?size=100"
-
 	
 	
 	func fetchData(pageNumber: Int, completion: @escaping (Result<Data, NetworkError>) -> Void) {

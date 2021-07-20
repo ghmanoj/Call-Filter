@@ -12,14 +12,15 @@ struct CallFilterApp: App {
 	@StateObject var dbUpdateViewModel = DbUpdateViewModel()
 	@StateObject var statisticsViewModel = StatisticsViewModel()
 	@StateObject var lookupViewModel = LookupViewModel()
-
-
+	@StateObject var settingsViewModel = SettingsViewModel()
+	
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
 				.environmentObject(dbUpdateViewModel)
 				.environmentObject(statisticsViewModel)
 				.environmentObject(lookupViewModel)
+				.environmentObject(settingsViewModel)
 		}
 	}
 }

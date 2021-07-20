@@ -20,15 +20,8 @@ class StatisticsViewModel: ObservableObject {
 	
 	func fetchActionStatistics() {
 		// get statistics and update from dispatchqueuemain
-		actionStatistics = ActionsStatistics(calls: 3234, sms: 32423, blockedPercent: 0.9)
 	}
 	
 	func fetchTopLocationStatistics() {
-		topLocationStatistics = [
-			.init(state: "Arizona", count: 100),
-			.init(state: "California", count: 50),
-			.init(state: "New York", count: 3290),
-			.init(state: "Ohio", count: 321)
-		]
 	}
 }

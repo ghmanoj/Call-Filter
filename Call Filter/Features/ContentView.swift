@@ -10,16 +10,20 @@ import Combine
 
 struct ContentView: View {
 	
-	@State var isLookup = true
+	@State var layoutType: LayoutType = .lookup
 	
 	var body: some View {
 		VStack {
-			if isLookup {
-				LookupView()
-			} else {
-				FilterView()
+			switch(layoutType) {
+				case .lookup:
+					LookupView()
+				case .filter:
+					FilterView()
+				case .settings:
+					SettingsView()
 			}
-			BottomBar(isLookup: $isLookup)
+
+			BottomBar(layoutType: $layoutType)
 		}
 	}
 }

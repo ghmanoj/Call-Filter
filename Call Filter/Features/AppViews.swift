@@ -273,41 +273,87 @@ struct FilterView: View {
 }
 
 
+// Settings View
+struct SettingsView: View {
+	@EnvironmentObject var viewModel: SettingsViewModel
+
+	var body: some View {
+		VStack(alignment: .leading) {
+			
+			Text("Filter Settings")
+				.font(.title)
+				.padding(.bottom)
+			
+			VStack(spacing: 15) {
+				Toggle("Enable Call Filter", isOn: $viewModel.isCallFilterOn)
+					.font(.title2)
+				Toggle("Enable Message Filter", isOn: $viewModel.isMessageFilterOn)
+					.font(.title2)
+			}
+			.padding(.top, 20)
+			
+			Spacer(minLength: 0)
+		}
+		.padding()
+		.frame(maxHeight: .infinity)
+	}
+}
+
 // Bottom Bar
 struct BottomBar: View {
-	@Binding var isLookup: Bool
+	@Binding var layoutType: LayoutType
 	
 	var body: some View {
-		HStack(spacing: 50) {
+		HStack(spacing: 40) {
 			VStack {
 				Image(systemName: "magnifyingglass")
 					.font(.title)
-					.foregroundColor(isLookup ? .blue : .gray)
+					.foregroundColor((layoutType == .lookup) ? .red : .secondary)
 					.onTapGesture {
 						withAnimation(.easeIn(duration: 0.1)) {
-							isLookup = true
+							layoutType = .lookup
 						}
 					}
 				
 				Text("Lookup")
 					.font(.callout)
-					.foregroundColor(isLookup ? .blue : .gray)
 			}
 			
 			VStack {
 				Image(systemName: "flame")
 					.font(.title)
-					.foregroundColor(isLookup ? .gray : .red)
+					.foregroundColor((layoutType == .filter) ? .red : .secondary)
 					.onTapGesture {
 						withAnimation(.easeIn(duration: 0.1)) {
-							isLookup = false
+							layoutType = .filter
 						}
 					}
 				
 				Text("Filter")
 					.font(.callout)
-					.foregroundColor(isLookup ? .gray : .red)
+			}
+			
+			VStack {
+				Image(systemName: "gear")
+					.font(.title)
+					.foregroundColor((layoutType == .settings) ? .red : .secondary)
+					.onTapGesture {
+						withAnimation(.easeIn(duration: 0.1)) {
+							layoutType = .settings
+						}
+					}
+				
+				Text("Settings")
+					.font(.callout)
 			}
 		}
+	}
+}
+
+
+
+struct SettingsView_Preview: PreviewProvider {
+	static var previews: some View {
+		SettingsView()
 	}
 }

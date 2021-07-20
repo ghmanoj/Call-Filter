@@ -30,7 +30,7 @@ class DbUpdateViewModel: ObservableObject {
 				switch result {
 					case .success(let data):
 						let result = self.parseData(data: data)
-						print(result)
+						print("Received \(result.count) spammer data models")
 					case .failure(let error):
 						print(error)
 				}
