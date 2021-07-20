@@ -4,9 +4,10 @@
 
 ### TODO
 - [x] Separate UI and View Model
-- [ ] Add CoreData
 - [ ] Fetch data from real api
+- [ ] Add CoreData
 
 
-<img src="https://github.com/ghmanoj/Call-Filter/blob/b9d6db9b2b7e761ffd46e947b4f0be7b395424fb/demo/lookup.png" width=150 align=left><img src="https://github.com/ghmanoj/Call-Filter/blob/b9d6db9b2b7e761ffd46e947b4f0be7b395424fb/demo/filter.png" width=150 align=left>
-<img src="https://github.com/ghmanoj/Call-Filter/blob/01f83836e30e0d2bb38cee7d5497d7dfba153542/demo/lookup_dark.PNG" width=150 align=left><img src="https://github.com/ghmanoj/Call-Filter/blob/01f83836e30e0d2bb38cee7d5497d7dfba153542/demo/filter_dark.PNG" width=150 align=left>
+<img src="https://github.com/ghmanoj/Call-Filter/blob/0b33cd51a6439ccf8fb394d3c40c9d187e60a69d/demo/lookup.png" width=150 align=left><img src="https://github.com/ghmanoj/Call-Filter/blob/0b33cd51a6439ccf8fb394d3c40c9d187e60a69d/demo/filter.png" width=150 align=left><img src="https://github.com/ghmanoj/Call-Filter/blob/0b33cd51a6439ccf8fb394d3c40c9d187e60a69d/demo/settings.png" width=150 align=left>
+
+<img src="https://github.com/ghmanoj/Call-Filter/blob/0b33cd51a6439ccf8fb394d3c40c9d187e60a69d/demo/lookup_dark.PNG" width=150 align=left><img src="https://github.com/ghmanoj/Call-Filter/blob/0b33cd51a6439ccf8fb394d3c40c9d187e60a69d/demo/filter_dark.PNG" width=150 align=left><img src="https://github.com/ghmanoj/Call-Filter/blob/0b33cd51a6439ccf8fb394d3c40c9d187e60a69d/demo/settings_dark.png" width=150 align=left>
