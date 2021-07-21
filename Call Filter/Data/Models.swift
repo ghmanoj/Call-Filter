@@ -8,6 +8,12 @@
 import Foundation
 
 
+struct FilterSettingsModel {
+	var isCall: Bool
+	var isMessage: Bool
+}
+
+
 struct SpammerLocation: Identifiable {
 	var id = UUID()
 	let state: String

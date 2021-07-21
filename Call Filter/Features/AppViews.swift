@@ -284,13 +284,20 @@ struct SettingsView: View {
 				.font(.title)
 				.padding(.bottom)
 			
-			VStack(spacing: 15) {
-				Toggle("Enable Call Filter", isOn: $viewModel.isCallFilterOn)
+			VStack(spacing: 20) {
+				Toggle("Call Filter", isOn: $viewModel.settings.isCall)
+					.onChange(of: viewModel.settings.isCall) {_ in
+						self.viewModel.updateFilterSettings()
+					}
 					.font(.title2)
-				Toggle("Enable Message Filter", isOn: $viewModel.isMessageFilterOn)
+				
+				Toggle("Message Filter", isOn: $viewModel.settings.isMessage)
+					.onChange(of: viewModel.settings.isMessage) {_ in
+						self.viewModel.updateFilterSettings()
+					}
 					.font(.title2)
 			}
-			.padding(.top, 20)
+			.padding()
 			
 			Spacer(minLength: 0)
 		}

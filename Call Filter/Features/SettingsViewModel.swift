@@ -8,25 +8,22 @@
 import Foundation
 
 class SettingsViewModel: ObservableObject {
-	@Published var isCallFilterOn: Bool = false
-	@Published var isMessageFilterOn: Bool = false
 	
+	@Published var settings: FilterSettingsModel
+	
+	private let persistence = PersistenceController.shared
 	
 	init() {
-		getUserSettings()
+		let entity = persistence.getFilterSettings()
+		self.settings = FilterSettingsModel(isCall: entity.call, isMessage: entity.message)
 	}
 	
-	func onCallFilterUpdate() {
-		
-	}
-	
-	func onMessageFilterUpdate() {
-		
-	}
-	
-	private func getUserSettings() {
-		// get things from persistence
-		isCallFilterOn = true
-		isMessageFilterOn = false
+	func updateFilterSettings() {
+		DispatchQueue.global(qos: .default).async {
+			let s = self.persistence.getFilterSettings()
+			s.call = self.settings.isCall
+			s.message = self.settings.isMessage
+			self.persistence.saveFilterSettings(settings: s)
+		}
 	}
 }

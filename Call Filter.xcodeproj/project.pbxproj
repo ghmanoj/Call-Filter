@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF5108E926A79F6900A63298 /* AppPersistenceModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AF5108E726A79F6900A63298 /* AppPersistenceModel.xcdatamodeld */; };
+		AF5108EB26A7A0F000A63298 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5108EA26A7A0F000A63298 /* Persistence.swift */; };
 		AF614B8926A2AB5D000D5ACA /* LookupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF614B8826A2AB5D000D5ACA /* LookupViewModel.swift */; };
 		AF614B8B26A2AB9E000D5ACA /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF614B8A26A2AB9E000D5ACA /* Models.swift */; };
 		AF614B8D26A2ABCD000D5ACA /* AppViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF614B8C26A2ABCD000D5ACA /* AppViews.swift */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF5108E826A79F6900A63298 /* AppPersistenceModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppPersistenceModel.xcdatamodel; sourceTree = "<group>"; };
+		AF5108EA26A7A0F000A63298 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		AF614B8826A2AB5D000D5ACA /* LookupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookupViewModel.swift; sourceTree = "<group>"; };
 		AF614B8A26A2AB9E000D5ACA /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		AF614B8C26A2ABCD000D5ACA /* AppViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViews.swift; sourceTree = "<group>"; };
@@ -72,6 +76,7 @@
 		AF8CF000269FE11D00695129 /* Call Filter */ = {
 			isa = PBXGroup;
 			children = (
+				AF5108E726A79F6900A63298 /* AppPersistenceModel.xcdatamodeld */,
 				AFC8572226A4DA4E00C5F203 /* Data */,
 				AFC8572126A4D9E800C5F203 /* Features */,
 				AFC8572026A4D9E400C5F203 /* Api */,
@@ -127,6 +132,7 @@
 			children = (
 				AF614B8A26A2AB9E000D5ACA /* Models.swift */,
 				AFD628D526A699DF00FEB3CB /* LayoutType.swift */,
+				AF5108EA26A7A0F000A63298 /* Persistence.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -202,6 +208,8 @@
 			files = (
 				AF614B8D26A2ABCD000D5ACA /* AppViews.swift in Sources */,
 				AF614B8F26A2B637000D5ACA /* DbUpdateViewModel.swift in Sources */,
+				AF5108E926A79F6900A63298 /* AppPersistenceModel.xcdatamodeld in Sources */,
+				AF5108EB26A7A0F000A63298 /* Persistence.swift in Sources */,
 				AFC8571E26A4AD1C00C5F203 /* SpamDbApiService.swift in Sources */,
 				AFC8572526A4DADE00C5F203 /* SpamDbParser.swift in Sources */,
 				AF614B8B26A2AB9E000D5ACA /* Models.swift in Sources */,
@@ -400,6 +408,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AF5108E726A79F6900A63298 /* AppPersistenceModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AF5108E826A79F6900A63298 /* AppPersistenceModel.xcdatamodel */,
+			);
+			currentVersion = AF5108E826A79F6900A63298 /* AppPersistenceModel.xcdatamodel */;
+			path = AppPersistenceModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AF8CEFF6269FE11D00695129 /* Project object */;
 }
