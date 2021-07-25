@@ -6,6 +6,7 @@
 - [x] Add CoreData
 - [ ] Improve phone lookup functionality
 - [ ] Add backend services for working with calls and sms
+- [ ] Implementation for persisting filtered call and sms statistics
 
 
 <img src="https://github.com/ghmanoj/Call-Filter/blob/727ae6e41eab748f7554cb81c7318de3f823d374/demo/lookup_darkmode.png" width=150 align=left><img src="https://github.com/ghmanoj/Call-Filter/blob/727ae6e41eab748f7554cb81c7318de3f823d374/demo/filter_darkmode.png" width=150 align=left><img src="https://github.com/ghmanoj/Call-Filter/blob/727ae6e41eab748f7554cb81c7318de3f823d374/demo/settings_darkmode.png" width=150 align=left>
