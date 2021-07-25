@@ -12,6 +12,8 @@ struct ContentView: View {
 	
 	@State var layoutType: LayoutType = .lookup
 	
+	@EnvironmentObject private var viewModel: DbUpdateViewModel
+	
 	var body: some View {
 		VStack {
 			switch(layoutType) {
@@ -24,6 +26,19 @@ struct ContentView: View {
 			}
 
 			BottomBar(layoutType: $layoutType)
+				.onAppear {
+					DispatchQueue.global(qos: .userInitiated).async {
+						let isValid = viewModel.isSpamDbValid()
+						
+						if isValid {
+							print("SpamDB contains data so it is valid")
+						}
+						
+						DispatchQueue.main.async {
+							self.layoutType = isValid ? .lookup : .filter
+						}
+					}
+				}
 		}
 	}
 }

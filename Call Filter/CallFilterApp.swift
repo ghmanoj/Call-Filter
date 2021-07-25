@@ -17,10 +17,22 @@ struct CallFilterApp: App {
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
+				.modifier(DarkModeViewModifier())
 				.environmentObject(dbUpdateViewModel)
 				.environmentObject(statisticsViewModel)
 				.environmentObject(lookupViewModel)
 				.environmentObject(settingsViewModel)
 		}
+	}
+}
+
+
+public struct DarkModeViewModifier: ViewModifier {
+	@AppStorage("isDarkMode") var isDarkMode: Bool = true
+	
+	public func body(content: Content) -> some View {
+		content
+			.environment(\.colorScheme, isDarkMode ? .dark : .light)
+			.preferredColorScheme(isDarkMode ? .dark : .light)
 	}
 }

@@ -12,7 +12,7 @@ class DbUpdateViewModel: ObservableObject {
 	@Published var isUpdating = false
 	
 	@Published var spamDbInfo: SpamDbInfo? = nil
-
+	
 	private let spamDbApiService = SpamDbApiService()
 	private let persistence = PersistenceController.shared
 	
@@ -22,12 +22,34 @@ class DbUpdateViewModel: ObservableObject {
 	}
 	
 	private func updateSpamDbInfo() {
-		DispatchQueue.main.async {
-			let callCount = self.persistence.getCallSpammerCount()
-			let smsCount = self.persistence.getSmsSpammerCount()
-			self.spamDbInfo = SpamDbInfo(callSpam: callCount, smsSpam: smsCount)
+		persistence.getSpammerCounts { callCount, smsCount in
+			DispatchQueue.main.async {
+				self.spamDbInfo = SpamDbInfo(callSpam: callCount, smsSpam: smsCount)
+			}
 		}
 	}
+	
+	func isSpamDbValid() -> Bool {
+		let count = persistence.getSpamDbCount()
+		return count > 0
+	}
+	
+	func clearSpamDb() {
+		if isUpdating {
+			print("Clearing SpamDB already in progress, ignoring this request..")
+			return
+		}
+		
+		isUpdating = true
+		
+		persistence.clearSpamDb {
+			self.updateSpamDbInfo()
+			DispatchQueue.main.async {
+				self.isUpdating = false
+			}
+		}
+	}
+	
 	
 	func updateSpamDb() {
 		if isUpdating {
@@ -40,18 +62,16 @@ class DbUpdateViewModel: ObservableObject {
 		// do db update here
 		// like fetching data from api and storing in core data..
 		DispatchQueue.global(qos: .userInitiated).async {
-
+			
 			self.spamDbApiService.fetchData(pageNumber: 0) { result in
 				switch result {
 					case .success(let data):
 						let result = self.parseData(data: data)
 						print("Received \(result.count) spammer data models")
 						
-						DispatchQueue.main.async {
-							self.persistence.saveSpamDb(spammerModel: result)
+						self.persistence.saveSpamDb(spammerModel: result) {
+							self.updateSpamDbInfo()
 						}
-						
-						self.updateSpamDbInfo()
 					case .failure(let error):
 						print(error)
 				}
@@ -66,7 +86,7 @@ class DbUpdateViewModel: ObservableObject {
 		do {
 			let decoder = JSONDecoder()
 			decoder.keyDecodingStrategy = .convertFromSnakeCase
-		
+			
 			let parsedData = try decoder.decode(SpamDbApiResponse.self, from: data)
 			return parsedData.spammers
 			

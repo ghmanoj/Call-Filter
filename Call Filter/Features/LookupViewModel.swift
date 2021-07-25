@@ -27,6 +27,7 @@ class LookupViewModel: ObservableObject {
 	
 	private var isPhoneNumberValidPubliser: AnyPublisher<Bool, Never> {
 		$numberQuery
+			.receive(on: RunLoop.main)
 			.removeDuplicates()
 			.map { input in
 				return self.phoneCheck.evaluate(with: input)
@@ -40,11 +41,13 @@ class LookupViewModel: ObservableObject {
 		phValidationCancellable = isPhoneNumberValidPubliser
 			.sink(receiveValue: { valid in
 				self.showPrompt = !valid
-				
 				if valid {
 					print("Number format is \(self.numberQuery)")
 					let formatted = self.numberQuery.toPhoneNumber()
 					self.lookupSpammer(formatted)
+				} else {
+					print("Invalid and query number is \(self.numberQuery)")
+					self.spammer = []
 				}
 			})
 	}
@@ -63,7 +66,6 @@ class LookupViewModel: ObservableObject {
 				)
 			}
 		}
-		
 	}
 }
 

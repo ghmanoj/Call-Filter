@@ -23,5 +23,6 @@ class StatisticsViewModel: ObservableObject {
 	}
 	
 	func fetchTopLocationStatistics() {
+		
 	}
 }

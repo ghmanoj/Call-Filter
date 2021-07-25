@@ -29,7 +29,7 @@ struct UpdateFilterDbCard: View {
 				Text("Spammer Database")
 					.font(.system(size: 25))
 					.fontWeight(.medium)
-
+				
 				
 				HStack {
 					Text("Call Spammers")
@@ -44,8 +44,6 @@ struct UpdateFilterDbCard: View {
 				}
 			}
 			.padding(.bottom, 20)
-
-			
 			
 			HStack(spacing: 20) {
 				
@@ -69,10 +67,22 @@ struct UpdateFilterDbCard: View {
 						self.viewShowing = false
 					}
 			}
+			
+			VStack {
+				Button(action: {
+					viewModel.clearSpamDb()
+				}) {
+					Text("ClearDB")
+						.font(.title2)
+				}
+				.foregroundColor(.red)
+			}
+			.padding(.top, 8)
+			
 		}
 		.padding()
 		.frame(maxWidth: .infinity)
-		.frame(height: UIScreen.screenHeight / 4.2)
+		.frame(height: UIScreen.screenHeight / 3.8)
 		.background(getBackground())
 		.cornerRadius(20)
 	}
@@ -91,7 +101,7 @@ struct ActionsStatisticsView: View {
 	@EnvironmentObject var viewModel: StatisticsViewModel
 	
 	var body: some View {
-		VStack(alignment: .leading) {
+		VStack(alignment: .leading, spacing: 15) {
 			HStack(alignment: .center) {
 				Text("Spammer Statistics")
 					.font(.system(size: 25))
@@ -123,7 +133,7 @@ struct ActionsStatisticsView: View {
 		}
 		.padding()
 		.frame(maxWidth: .infinity)
-		.frame(height: UIScreen.screenHeight / 4.2)
+		.frame(height: UIScreen.screenHeight / 3.8)
 		.background(getBackground())
 		.cornerRadius(20)
 		.onAppear {
@@ -176,6 +186,7 @@ struct TopLocationStatisticsView: View {
 		}
 		.padding()
 		.frame(maxWidth: .infinity)
+		.frame(minHeight: UIScreen.screenHeight / 3.8)
 		.background(getBackground())
 		.cornerRadius(20)
 		.onAppear {
@@ -193,6 +204,8 @@ struct TopLocationStatisticsView: View {
 
 // Lookup View
 struct LookupView: View {
+	
+	
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
 	@EnvironmentObject var viewModel: LookupViewModel
 	
@@ -250,7 +263,7 @@ struct LookupView: View {
 			
 			List {
 				ForEach(viewModel.spammer, id: \.id) { item in
-//				ForEach(mockDataModel, id: \.id) { item in
+					//				ForEach(mockDataModel, id: \.id) { item in
 					HStack {
 						VStack(alignment: .leading) {
 							Text("Number: \(item.number)")
@@ -304,6 +317,9 @@ struct FilterView: View {
 
 // Settings View
 struct SettingsView: View {
+	
+	@AppStorage("isDarkMode") var isDarkMode: Bool = true
+
 	@EnvironmentObject var viewModel: SettingsViewModel
 	
 	var body: some View {
@@ -320,10 +336,14 @@ struct SettingsView: View {
 					}
 					.font(.title2)
 				
-				Toggle("Message Filter", isOn: $viewModel.settings.isMessage)
+				Toggle("SMS Filter", isOn: $viewModel.settings.isMessage)
 					.onChange(of: viewModel.settings.isMessage) {_ in
 						self.viewModel.updateFilterSettings()
 					}
+					.font(.title2)
+				
+				
+				Toggle("Dark Mode", isOn: $isDarkMode)
 					.font(.title2)
 			}
 			.padding()
@@ -389,9 +409,9 @@ struct BottomBar: View {
 
 
 struct LookupView_Previews: PreviewProvider {
-
+	
 	@StateObject static var lookupViewModel = LookupViewModel()
-
+	
 	static var previews: some View {
 		LookupView()
 			.environmentObject(lookupViewModel)
@@ -404,19 +424,19 @@ struct FilterView_Previews: PreviewProvider {
 	@StateObject static var dbUpdateViewModel = DbUpdateViewModel()
 	@StateObject static var statisticsViewModel = StatisticsViewModel()
 	@StateObject static var lookupViewModel = LookupViewModel()
-
+	
 	static var previews: some View {
 		FilterView()
 			.environmentObject(dbUpdateViewModel)
 			.environmentObject(statisticsViewModel)
 			.environmentObject(lookupViewModel)
 	}
-
+	
 }
 
 
 let mockDataModel: [SpammerModel] = [
 	.init(id: 0, number: "123-456-5678", state: "Ohio", type: .call),
 	.init(id: 1, number: "123-456-5678", state: "Alaska", type: .sms)
-
+	
 ]
