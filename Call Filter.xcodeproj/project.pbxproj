@@ -14,6 +14,7 @@
 		AF614B8D26A2ABCD000D5ACA /* AppViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF614B8C26A2ABCD000D5ACA /* AppViews.swift */; };
 		AF614B8F26A2B637000D5ACA /* DbUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF614B8E26A2B637000D5ACA /* DbUpdateViewModel.swift */; };
 		AF614B9126A2BB63000D5ACA /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF614B9026A2BB63000D5ACA /* StatisticsViewModel.swift */; };
+		AF68799226A7EBDD0094B300 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF68799126A7EBDD0094B300 /* WebService.swift */; };
 		AF8CF002269FE11D00695129 /* CallFilterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8CF001269FE11D00695129 /* CallFilterApp.swift */; };
 		AF8CF004269FE11D00695129 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8CF003269FE11D00695129 /* ContentView.swift */; };
 		AF8CF006269FE11E00695129 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF8CF005269FE11E00695129 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		AF614B8C26A2ABCD000D5ACA /* AppViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViews.swift; sourceTree = "<group>"; };
 		AF614B8E26A2B637000D5ACA /* DbUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbUpdateViewModel.swift; sourceTree = "<group>"; };
 		AF614B9026A2BB63000D5ACA /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
+		AF68799126A7EBDD0094B300 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		AF8CEFFE269FE11D00695129 /* Call Filter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Call Filter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF8CF001269FE11D00695129 /* CallFilterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallFilterApp.swift; sourceTree = "<group>"; };
 		AF8CF003269FE11D00695129 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			children = (
 				AFA4CEA826A12C3B00752430 /* ViewExt.swift */,
 				AFC8572426A4DADE00C5F203 /* SpamDbParser.swift */,
+				AF68799126A7EBDD0094B300 /* WebService.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				AF614B8D26A2ABCD000D5ACA /* AppViews.swift in Sources */,
 				AF614B8F26A2B637000D5ACA /* DbUpdateViewModel.swift in Sources */,
 				AF5108E926A79F6900A63298 /* AppPersistenceModel.xcdatamodeld in Sources */,
+				AF68799226A7EBDD0094B300 /* WebService.swift in Sources */,
 				AF5108EB26A7A0F000A63298 /* Persistence.swift in Sources */,
 				AFC8571E26A4AD1C00C5F203 /* SpamDbApiService.swift in Sources */,
 				AFC8572526A4DADE00C5F203 /* SpamDbParser.swift in Sources */,

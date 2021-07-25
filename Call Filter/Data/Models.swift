@@ -14,6 +14,11 @@ struct FilterSettingsModel {
 }
 
 
+struct SpamDbInfo {
+	let callSpam: Int
+	let smsSpam: Int
+}
+
 struct SpammerLocation: Identifiable {
 	var id = UUID()
 	let state: String

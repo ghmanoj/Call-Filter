@@ -23,10 +23,38 @@ struct UpdateFilterDbCard: View {
 	
 	var body: some View {
 		VStack {
-			HStack {
-				Text("Spammer")
+			
+			VStack(alignment: .center, spacing: 5) {
+				
+				Text("Spammer Database")
 					.font(.system(size: 25))
 					.fontWeight(.medium)
+
+				
+				HStack {
+					Text("Call Spammers")
+						.font(.callout)
+					Text("\(viewModel.spamDbInfo?.callSpam ?? 0)")
+				}
+				
+				HStack {
+					Text("Sms Spammers")
+						.font(.callout)
+					Text("\(viewModel.spamDbInfo?.smsSpam ?? 0)")
+				}
+			}
+			.padding(.bottom, 20)
+
+			
+			
+			HStack(spacing: 20) {
+				
+				Button(action: {
+					viewModel.updateSpamDb()
+				}) {
+					Text("Update")
+						.font(.title)
+				}
 				
 				Image(systemName: updatingImage)
 					.foregroundColor(.red)
@@ -40,18 +68,6 @@ struct UpdateFilterDbCard: View {
 					.onDisappear {
 						self.viewShowing = false
 					}
-				
-				Text("Database")
-					.font(.system(size: 25))
-					.fontWeight(.medium)
-			}
-			.padding(.vertical)
-			
-			Button(action: {
-				viewModel.updateSpamDb()
-			}) {
-				Text("Update")
-					.font(.title2)
 			}
 		}
 		.padding()
@@ -184,61 +200,74 @@ struct LookupView: View {
 	
 	var body: some View {
 		VStack {
+			HStack {
+				HStack {
+					Image(systemName: "magnifyingglass")
+						.font(.body)
+						.foregroundColor(.gray)
+						.padding(.trailing, 8)
+					
+					TextField("Search Phone Number", text: $viewModel.numberQuery, onEditingChanged: {focused in
+						if focused {
+							withAnimation {
+								self.searchFieldActive = true
+							}
+						}
+					})
+					.autocapitalization(.none)
+					.disableAutocorrection(true)
+					.font(.title3)
+					.keyboardType(.phonePad)
+				}
+				.padding([.horizontal, .vertical], 10)
+				.background(getBackground())
+				.cornerRadius(15)
+				
+				if searchFieldActive {
+					Button(action: {
+						withAnimation {
+							self.searchFieldActive = false
+						}
+						
+						UIApplication.shared.endEditing() // Call to dismiss keyboard
+					}) {
+						Text("Cancel")
+							.foregroundColor(searchFieldActive ? .primary : .secondary)
+							.font(.callout)
+							.padding(.leading, 5)
+					}
+				}
+			}
 			
 			VStack {
-				HStack {
+				Text(viewModel.showPrompt ? "Number Format: 123-456-5678" : "")
+					.font(.caption2)
+					.foregroundColor(.secondary)
+				Spacer(minLength: 0)
+			}
+			.padding(.top, 3)
+			.frame(height: 40)
+			
+			List {
+				ForEach(viewModel.spammer, id: \.id) { item in
+//				ForEach(mockDataModel, id: \.id) { item in
 					HStack {
-						Image(systemName: "magnifyingglass")
-							.font(.body)
-							.foregroundColor(.gray)
-							.padding(.trailing, 8)
-						
-						TextField("Search Phone Number", text: $viewModel.numberQuery, onEditingChanged: {focused in
-							if focused {
-								withAnimation {
-									self.searchFieldActive = true
-								}
-							}
-						})
-						.autocapitalization(.none)
-						.disableAutocorrection(true)
-						.font(.title3)
-						.keyboardType(.phonePad)
-					}
-					.padding([.horizontal, .vertical], 10)
-					.background(getBackground())
-					.cornerRadius(15)
-					
-					if searchFieldActive {
-						Button(action: {
-							withAnimation {
-								self.searchFieldActive = false
-							}
-							
-							UIApplication.shared.endEditing() // Call to dismiss keyboard
-						}) {
-							Text("Cancel")
-								.foregroundColor(searchFieldActive ? .primary : .secondary)
-								.font(.callout)
-								.padding(.leading, 5)
+						VStack(alignment: .leading) {
+							Text("Number: \(item.number)")
+								.font(.headline)
+							Text("Location: \(item.state)")
+								.font(.subheadline)
+						}
+						Spacer(minLength: 0)
+						VStack {
+							Image(systemName: item.type == .call ?  "phone" : "message")
+								.foregroundColor(.red.opacity(0.9))
 						}
 					}
 				}
-				
-				VStack {
-					Text(viewModel.showPrompt ? "Formats: (123) 456-5678, 123-456 5678, 123 456 5678, 1234565678" : "")
-						.font(.caption2)
-						.foregroundColor(.secondary)
-					Spacer(minLength: 0)
-				}
-				.padding(.top, 3)
-				.frame(height: 100)
-				
 			}
-			.padding()
-			
-			Spacer(minLength: 20)
 		}
+		.padding()
 	}
 	
 	func getBackground() -> Color {
@@ -276,7 +305,7 @@ struct FilterView: View {
 // Settings View
 struct SettingsView: View {
 	@EnvironmentObject var viewModel: SettingsViewModel
-
+	
 	var body: some View {
 		VStack(alignment: .leading) {
 			
@@ -359,8 +388,35 @@ struct BottomBar: View {
 
 
 
-struct SettingsView_Preview: PreviewProvider {
+struct LookupView_Previews: PreviewProvider {
+
+	@StateObject static var lookupViewModel = LookupViewModel()
+
 	static var previews: some View {
-		SettingsView()
+		LookupView()
+			.environmentObject(lookupViewModel)
 	}
 }
+
+
+
+struct FilterView_Previews: PreviewProvider {
+	@StateObject static var dbUpdateViewModel = DbUpdateViewModel()
+	@StateObject static var statisticsViewModel = StatisticsViewModel()
+	@StateObject static var lookupViewModel = LookupViewModel()
+
+	static var previews: some View {
+		FilterView()
+			.environmentObject(dbUpdateViewModel)
+			.environmentObject(statisticsViewModel)
+			.environmentObject(lookupViewModel)
+	}
+
+}
+
+
+let mockDataModel: [SpammerModel] = [
+	.init(id: 0, number: "123-456-5678", state: "Ohio", type: .call),
+	.init(id: 1, number: "123-456-5678", state: "Alaska", type: .sms)
+
+]

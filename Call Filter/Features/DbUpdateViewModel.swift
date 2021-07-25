@@ -11,9 +11,24 @@ class DbUpdateViewModel: ObservableObject {
 	
 	@Published var isUpdating = false
 	
-	
-	private let spamDbApiService = SpamDbApiService()
+	@Published var spamDbInfo: SpamDbInfo? = nil
 
+	private let spamDbApiService = SpamDbApiService()
+	private let persistence = PersistenceController.shared
+	
+	
+	init() {
+		updateSpamDbInfo()
+	}
+	
+	private func updateSpamDbInfo() {
+		DispatchQueue.main.async {
+			let callCount = self.persistence.getCallSpammerCount()
+			let smsCount = self.persistence.getSmsSpammerCount()
+			self.spamDbInfo = SpamDbInfo(callSpam: callCount, smsSpam: smsCount)
+		}
+	}
+	
 	func updateSpamDb() {
 		if isUpdating {
 			print("Update already started, ignoring this request..")
@@ -31,6 +46,12 @@ class DbUpdateViewModel: ObservableObject {
 					case .success(let data):
 						let result = self.parseData(data: data)
 						print("Received \(result.count) spammer data models")
+						
+						DispatchQueue.main.async {
+							self.persistence.saveSpamDb(spammerModel: result)
+						}
+						
+						self.updateSpamDbInfo()
 					case .failure(let error):
 						print(error)
 				}

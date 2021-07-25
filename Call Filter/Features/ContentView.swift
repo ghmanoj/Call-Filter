@@ -38,5 +38,6 @@ struct ContentView_Previews: PreviewProvider {
 		ContentView()
 			.environmentObject(dbUpdateViewModel)
 			.environmentObject(statisticsViewModel)
-			.environmentObject(lookupViewModel)	}
+			.environmentObject(lookupViewModel)
+	}
 }
