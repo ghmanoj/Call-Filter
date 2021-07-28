@@ -368,7 +368,7 @@ struct AddCustomSpammerView: View {
 	@State var number = ""
 	@State var isCallType = false
 	@State var isSmsType = false
-
+	
 	@State var location = ""
 	
 	var body: some View {
@@ -409,16 +409,17 @@ struct AddCustomSpammerView: View {
 					Toggle("Call", isOn: $isCallType)
 					Toggle("SMS", isOn: $isSmsType)
 				}
-				.frame(maxWidth: 110)
 				.font(.title2)
 			}
-				
+			.padding(.vertical)
 			
-			Button(action: {}) {
+			Button(action: {
+				print("Saving....")
+			}) {
 				Text("Save")
 					.font(.title)
 					.foregroundColor(.white)
-					.padding(.vertical, 15)
+					.padding(.vertical, 10)
 					.frame(maxWidth: .infinity)
 			}
 			.background(Color.red)
