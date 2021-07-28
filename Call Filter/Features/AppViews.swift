@@ -265,20 +265,29 @@ struct LookupView: View {
 			.padding(.top, 3)
 			.frame(height: 40)
 			
-			List {
-				ForEach(viewModel.spammer, id: \.id) { item in
-					//				ForEach(mockDataModel, id: \.id) { item in
-					HStack {
-						VStack(alignment: .leading) {
-							Text("Number: \(item.number)")
-								.font(.headline)
-							Text("Location: \(item.state)")
-								.font(.subheadline)
-						}
-						Spacer(minLength: 0)
-						VStack {
-							Image(systemName: item.type == .call ?  "phone" : "message")
-								.foregroundColor(.red.opacity(0.9))
+			if viewModel.spammer.count == 0 {
+				VStack(alignment: .center) {
+					Text("No Result Found")
+						.font(.title2)
+						.foregroundColor(.secondary)
+				}
+				.frame(maxHeight: .infinity)
+			} else {
+				List {
+					ForEach(viewModel.spammer, id: \.id) { item in
+						//				ForEach(mockDataModel, id: \.id) { item in
+						HStack {
+							VStack(alignment: .leading) {
+								Text("Number: \(item.number)")
+									.font(.headline)
+								Text("Location: \(item.state)")
+									.font(.subheadline)
+							}
+							Spacer(minLength: 0)
+							VStack {
+								Image(systemName: item.type == .call ?  "phone" : "message")
+									.foregroundColor(.red.opacity(0.9))
+							}
 						}
 					}
 				}
@@ -374,7 +383,7 @@ struct AddCustomSpammerView: View {
 	var body: some View {
 		VStack(alignment: .leading, spacing: 15) {
 			Text("Add Custom Filters")
-				.frame(maxWidth: .infinity)
+				.frame(maxWidth: .infinity, alignment: .leading)
 				.font(.title)
 				.padding(.bottom, 30)
 			
