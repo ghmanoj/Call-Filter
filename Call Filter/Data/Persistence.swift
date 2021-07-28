@@ -28,19 +28,20 @@ class PersistenceController {
 		}
 	}
 	
-	func getSpamDbCount() -> Int {
-		let fetchRequest: NSFetchRequest<Spammer> = NSFetchRequest(entityName: "Spammer")
-		
-		var spamDbCount = 0
-		
-		do {
-			let spammers = try context.fetch(fetchRequest)
-			spamDbCount = spammers.count
-		} catch {
-			print("Error while fetching spammer info \(error)")
+	func getSpamDbCount(callback: @escaping (Int) -> Void) {
+		container.performBackgroundTask { ctx in
+			let fetchRequest: NSFetchRequest<Spammer> = NSFetchRequest(entityName: "Spammer")
+			var spamDbCount = 0
+			do {
+				let spammers = try ctx.fetch(fetchRequest)
+				spamDbCount = spammers.count
+			} catch {
+				print("Error while fetching spammer info \(error)")
+			}
+			callback(spamDbCount)
 		}
-		return spamDbCount
 	}
+	
 	
 	func getSpammerCounts(callback: @escaping (Int, Int) -> Void) {
 		

@@ -10,5 +10,5 @@ import Foundation
 
 
 enum LayoutType: Int, Codable {
-	case lookup, filter, settings
+	case lookup, filter, settings, addcustom
 }

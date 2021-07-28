@@ -8,6 +8,7 @@
 import SwiftUI
 
 
+// MARK: - Update Filter Database Card
 struct UpdateFilterDbCard: View {
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
 	@EnvironmentObject var viewModel: DbUpdateViewModel
@@ -95,6 +96,7 @@ struct UpdateFilterDbCard: View {
 }
 
 
+// MARK: - Actions Statistics View
 struct ActionsStatisticsView: View {
 	
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
@@ -149,6 +151,7 @@ struct ActionsStatisticsView: View {
 }
 
 
+// MARK: - Top Location Statistics View (Card)
 struct TopLocationStatisticsView: View {
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
 	@EnvironmentObject var viewModel: StatisticsViewModel
@@ -183,6 +186,8 @@ struct TopLocationStatisticsView: View {
 				}
 				.font(.title3)
 			}
+			
+			Spacer(minLength: 0)
 		}
 		.padding()
 		.frame(maxWidth: .infinity)
@@ -202,9 +207,8 @@ struct TopLocationStatisticsView: View {
 }
 
 
-// Lookup View
+// MARK: - Lookup View
 struct LookupView: View {
-	
 	
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
 	@EnvironmentObject var viewModel: LookupViewModel
@@ -291,7 +295,7 @@ struct LookupView: View {
 }
 
 
-// Filter View
+// MARK: - Filter View
 struct FilterView: View {
 	var body: some View {
 		ScrollView {
@@ -315,11 +319,11 @@ struct FilterView: View {
 }
 
 
-// Settings View
+// MARK: - Settings View
 struct SettingsView: View {
 	
 	@AppStorage("isDarkMode") var isDarkMode: Bool = true
-
+	
 	@EnvironmentObject var viewModel: SettingsViewModel
 	
 	var body: some View {
@@ -355,7 +359,86 @@ struct SettingsView: View {
 	}
 }
 
-// Bottom Bar
+// MARK: - Add Custom (user input to spammer db)
+struct AddCustomSpammerView: View {
+	@EnvironmentObject var viewModel: CustomSpammerViewModel
+	@Environment(\.colorScheme) var colorScheme: ColorScheme
+	
+	
+	@State var number = ""
+	@State var isCallType = false
+	@State var isSmsType = false
+
+	@State var location = ""
+	
+	var body: some View {
+		VStack(alignment: .leading, spacing: 15) {
+			Text("Add Custom Filters")
+				.frame(maxWidth: .infinity)
+				.font(.title)
+				.padding(.bottom, 30)
+			
+			HStack(spacing: 20) {
+				Text("Number")
+					.font(.title2)
+					.frame(width: 120, alignment: .leading)
+				TextField("", text: $number)
+					.padding([.horizontal, .vertical], 10)
+					.background(getBackground())
+					.cornerRadius(10)
+			}
+			
+			
+			HStack(spacing: 20) {
+				Text("Location")
+					.font(.title2)
+					.frame(width: 120, alignment: .leading)
+				
+				TextField("", text: $location)
+					.padding([.horizontal, .vertical], 10)
+					.background(getBackground())
+					.cornerRadius(10)
+			}
+			
+			HStack(alignment: .top , spacing: 20) {
+				Text("Type")
+					.font(.title2)
+					.frame(width: 120, alignment: .leading)
+				
+				VStack(spacing: 10) {
+					Toggle("Call", isOn: $isCallType)
+					Toggle("SMS", isOn: $isSmsType)
+				}
+				.frame(maxWidth: 110)
+				.font(.title2)
+			}
+				
+			
+			Button(action: {}) {
+				Text("Save")
+					.font(.title)
+					.foregroundColor(.white)
+					.padding(.vertical, 15)
+					.frame(maxWidth: .infinity)
+			}
+			.background(Color.red)
+			.cornerRadius(25)
+			
+			Spacer(minLength: 0)
+		}
+		.padding()
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
+	}
+	
+	func getBackground() -> Color {
+		return colorScheme == .dark
+			? Color.white.opacity(0.1)
+			: Color.black.opacity(0.1)
+	}
+}
+
+
+// MARK: - Bottom Bar
 struct BottomBar: View {
 	@Binding var layoutType: LayoutType
 	
@@ -363,23 +446,48 @@ struct BottomBar: View {
 		HStack(spacing: 40) {
 			VStack {
 				Image(systemName: "magnifyingglass")
+					.resizable()
+					.aspectRatio(contentMode: .fit)
+					.frame(width: 30, height: 30)
 					.font(.title)
 					.foregroundColor((layoutType == .lookup) ? .red : .secondary)
 					.onTapGesture {
+						generateHepaticFeedback()
 						withAnimation(.easeIn(duration: 0.1)) {
 							layoutType = .lookup
 						}
 					}
-				
 				Text("Lookup")
+					.font(.callout)
+			}
+			
+			
+			VStack {
+				Image(systemName: "plus")
+					.resizable()
+					.aspectRatio(contentMode: .fit)
+					.frame(width: 30, height: 30)
+					.font(.title)
+					.foregroundColor((layoutType == .addcustom) ? .red : .secondary)
+					.onTapGesture {
+						generateHepaticFeedback()
+						withAnimation(.easeIn(duration: 0.1)) {
+							layoutType = .addcustom
+						}
+					}
+				Text("Add")
 					.font(.callout)
 			}
 			
 			VStack {
 				Image(systemName: "flame")
+					.resizable()
+					.aspectRatio(contentMode: .fit)
+					.frame(width: 30, height: 30)
 					.font(.title)
 					.foregroundColor((layoutType == .filter) ? .red : .secondary)
 					.onTapGesture {
+						generateHepaticFeedback()
 						withAnimation(.easeIn(duration: 0.1)) {
 							layoutType = .filter
 						}
@@ -389,54 +497,64 @@ struct BottomBar: View {
 					.font(.callout)
 			}
 			
+			
 			VStack {
 				Image(systemName: "gear")
+					.resizable()
+					.frame(width: 30, height: 30)
 					.font(.title)
 					.foregroundColor((layoutType == .settings) ? .red : .secondary)
 					.onTapGesture {
+						generateHepaticFeedback()
 						withAnimation(.easeIn(duration: 0.1)) {
 							layoutType = .settings
 						}
 					}
-				
 				Text("Settings")
 					.font(.callout)
 			}
 		}
 	}
-}
-
-
-
-struct LookupView_Previews: PreviewProvider {
 	
-	@StateObject static var lookupViewModel = LookupViewModel()
-	
-	static var previews: some View {
-		LookupView()
-			.environmentObject(lookupViewModel)
+	// for light hepatic feedback when bottom bar buttons are tapped
+	private func generateHepaticFeedback() {
+		let generator = UIImpactFeedbackGenerator(style: .light)
+		generator.impactOccurred()
 	}
 }
 
 
-
-struct FilterView_Previews: PreviewProvider {
-	@StateObject static var dbUpdateViewModel = DbUpdateViewModel()
-	@StateObject static var statisticsViewModel = StatisticsViewModel()
-	@StateObject static var lookupViewModel = LookupViewModel()
+struct AddCustomSpammerView_Previews: PreviewProvider {
+	@StateObject static var customSpammerViewModel = CustomSpammerViewModel()
 	
 	static var previews: some View {
-		FilterView()
-			.environmentObject(dbUpdateViewModel)
-			.environmentObject(statisticsViewModel)
-			.environmentObject(lookupViewModel)
+		AddCustomSpammerView()
+			.environmentObject(customSpammerViewModel)
 	}
-	
 }
 
 
-let mockDataModel: [SpammerModel] = [
-	.init(id: 0, number: "123-456-5678", state: "Ohio", type: .call),
-	.init(id: 1, number: "123-456-5678", state: "Alaska", type: .sms)
-	
-]
+//struct LookupView_Previews: PreviewProvider {
+//
+//	@StateObject static var lookupViewModel = LookupViewModel()
+//
+//	static var previews: some View {
+//		LookupView()
+//			.environmentObject(lookupViewModel)
+//	}
+//}
+
+//
+//
+//struct FilterView_Previews: PreviewProvider {
+//	@StateObject static var dbUpdateViewModel = DbUpdateViewModel()
+//	@StateObject static var statisticsViewModel = StatisticsViewModel()
+//	@StateObject static var lookupViewModel = LookupViewModel()
+//
+//	static var previews: some View {
+//		FilterView()
+//			.environmentObject(dbUpdateViewModel)
+//			.environmentObject(statisticsViewModel)
+//			.environmentObject(lookupViewModel)
+//	}
+//}

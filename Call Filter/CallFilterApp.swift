@@ -13,6 +13,7 @@ struct CallFilterApp: App {
 	@StateObject var statisticsViewModel = StatisticsViewModel()
 	@StateObject var lookupViewModel = LookupViewModel()
 	@StateObject var settingsViewModel = SettingsViewModel()
+	@StateObject var customSpammerViewModel = CustomSpammerViewModel()
 	
 	var body: some Scene {
 		WindowGroup {
@@ -22,16 +23,20 @@ struct CallFilterApp: App {
 				.environmentObject(statisticsViewModel)
 				.environmentObject(lookupViewModel)
 				.environmentObject(settingsViewModel)
+				.environmentObject(customSpammerViewModel)
 		}
 	}
 }
 
-
+// https://developer.apple.com/forums/thread/658818
+// https://stackoverflow.com/questions/64015565/how-to-implement-a-color-scheme-switch-with-the-system-value-option
 public struct DarkModeViewModifier: ViewModifier {
 	@AppStorage("isDarkMode") var isDarkMode: Bool = true
 	
 	public func body(content: Content) -> some View {
-		content
+//		UIApplication.shared.windows.first?.overrideUserInterfaceStyle = isDarkMode ? .dark : .light
+
+		return content
 			.environment(\.colorScheme, isDarkMode ? .dark : .light)
 			.preferredColorScheme(isDarkMode ? .dark : .light)
 	}

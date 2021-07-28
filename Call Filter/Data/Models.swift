@@ -55,3 +55,11 @@ struct SpamDbApiResponse: Codable {
 enum NetworkError: Error {
 	case badURL, requestFailed, unknown
 }
+
+
+
+
+let mockDataModel: [SpammerModel] = [
+	.init(id: 0, number: "123-456-5678", state: "Ohio", type: .call),
+	.init(id: 1, number: "123-456-5678", state: "Alaska", type: .sms)
+]

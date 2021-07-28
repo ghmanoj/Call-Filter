@@ -29,9 +29,10 @@ class DbUpdateViewModel: ObservableObject {
 		}
 	}
 	
-	func isSpamDbValid() -> Bool {
-		let count = persistence.getSpamDbCount()
-		return count > 0
+	func isSpamDbValid(callback: @escaping (Bool) -> Void) {
+		persistence.getSpamDbCount { count in
+			callback(count > 0)
+		}
 	}
 	
 	func clearSpamDb() {

@@ -21,26 +21,31 @@ struct ContentView: View {
 					LookupView()
 				case .filter:
 					FilterView()
+				case .addcustom:
+					AddCustomSpammerView()
 				case .settings:
 					SettingsView()
 			}
 
 			BottomBar(layoutType: $layoutType)
-				.onAppear {
-					DispatchQueue.global(qos: .userInitiated).async {
-						let isValid = viewModel.isSpamDbValid()
-						
-						if isValid {
-							print("SpamDB contains data so it is valid")
-						}
-						
-						DispatchQueue.main.async {
-							self.layoutType = isValid ? .lookup : .filter
-						}
-					}
-				}
+				.onAppear { loadData() }
+			
 		}
 	}
+	
+	func loadData() {
+		DispatchQueue.global(qos: .userInitiated).async {
+			viewModel.isSpamDbValid { isValid in
+				if isValid {
+					print("SpamDB contains data so it is valid")
+				}
+				DispatchQueue.main.async {
+					self.layoutType = isValid ? .lookup : .filter
+				}
+			}
+		}
+	}
+	
 }
 
 
@@ -48,11 +53,13 @@ struct ContentView_Previews: PreviewProvider {
 	@StateObject static var dbUpdateViewModel = DbUpdateViewModel()
 	@StateObject static var statisticsViewModel = StatisticsViewModel()
 	@StateObject static var lookupViewModel = LookupViewModel()
+	@StateObject static var customSpammerViewModel = CustomSpammerViewModel()
 	
 	static var previews: some View {
 		ContentView()
 			.environmentObject(dbUpdateViewModel)
 			.environmentObject(statisticsViewModel)
 			.environmentObject(lookupViewModel)
+			.environmentObject(customSpammerViewModel)
 	}
 }
