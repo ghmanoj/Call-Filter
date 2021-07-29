@@ -55,18 +55,20 @@ class LookupViewModel: ObservableObject {
 	
 	func lookupSpammer(_ number: String) {
 		let spammerEntities = persistence.getSpammers(number)
-				
+		
 		DispatchQueue.main.async {
 			self.spammer = spammerEntities.map { item in
 				SpammerModel(
 					id: Int(item.id),
 					number: item.number!,
 					state: item.location!,
-					type: item.type == 0 ? .call : .sms
+					type: item.type == 0 ? .call : .sms,
+					manual: item.manual
 				)
 			}
 		}
 	}
+	
 }
 
 extension String {

@@ -50,12 +50,12 @@ class PersistenceController {
 			
 			var callSpammerCount = 0
 			var smsSpammerCount = 0
-
+			
 			do {
 				let spammers = try ctx.fetch(fetchRequest)
 				callSpammerCount = spammers.filter { $0.type == 0 }.count
 				smsSpammerCount = spammers.filter { $0.type == 1 }.count
-
+				
 			} catch {
 				print("Error while fetching spammer info \(error)")
 			}
@@ -64,32 +64,35 @@ class PersistenceController {
 		}
 	}
 	
-	func getFilterSettings() -> FilterSettings {
-		let fetchRequest: NSFetchRequest<FilterSettings> = NSFetchRequest(entityName: "FilterSettings")
-		
-		var settings: FilterSettings?
-		
-		do {			
-			settings = try context.fetch(fetchRequest).first
-		} catch {
-			print("Error while fetching filter settings \(error)")
+	
+	func getFilterSettings(callback: @escaping (FilterSettings) -> Void) {
+		container.performBackgroundTask { ctx in
+			let fetchRequest: NSFetchRequest<FilterSettings> = NSFetchRequest(entityName: "FilterSettings")
+			
+			var settings: FilterSettings?
+			
+			do {
+				settings = try ctx.fetch(fetchRequest).first
+			} catch {
+				print("Error while fetching filter settings \(error)")
+			}
+			
+			if settings == nil {
+				settings = FilterSettings(context: ctx)
+				settings!.call = false
+				settings!.message = false
+				self.saveFilterSettings(settings: settings!)
+			}
+			
+			callback(settings!)
 		}
-		
-		if settings == nil {
-			settings = FilterSettings(context: context)
-			settings!.call = false
-			settings!.message = false
-			saveFilterSettings(settings: settings!)
-		}
-		
-		return settings!
 	}
 	
 	
 	func saveFilterSettings(settings: FilterSettings) {
-		
-		container.performBackgroundTask { ctx in
-			if settings.isUpdated {
+		if settings.isUpdated {
+			
+			container.performBackgroundTask { ctx in
 				do {
 					try ctx.save()
 				} catch {
@@ -100,6 +103,20 @@ class PersistenceController {
 	}
 	
 	func clearSpamDb(callback: @escaping () -> Void) {
+		container.performBackgroundTask { ctx in
+			let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Spammer")
+			let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+			
+			do {
+				try ctx.execute(batchDeleteRequest)
+			} catch {
+				print("Error while truncating Spammer table \(error)")
+			}
+			callback()
+		}
+	}
+	
+	func saveSpamDb(spammerModel: [SpammerModel], callback: @escaping () -> Void) {
 		
 		container.performBackgroundTask { ctx in
 			let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Spammer")
@@ -111,41 +128,28 @@ class PersistenceController {
 				print("Error while truncating Spammer table \(error)")
 			}
 			
-			callback()
-		}
-	}
-	
-	func saveSpamDb(spammerModel: [SpammerModel], callback: @escaping () -> Void) {
-
-		container.performBackgroundTask { ctx in
-			let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Spammer")
-			let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+			var index = 0
+			let total = spammerModel.count
 			
-			do {
-				try ctx.execute(batchDeleteRequest)
-			} catch {
-				print("Error while truncating Spammer table \(error)")
-			}
-			
-			var spammers = [Spammer]()
-			
-			for i in 0..<spammerModel.count {
-				let model = spammerModel[i]
+			let batchInsert = NSBatchInsertRequest(entity: Spammer.entity()) { (managedObject: NSManagedObject) -> Bool in
+				guard index < total else { return true }
 				
-				let sp = Spammer(context: ctx)
-				sp.id = Int64(model.id)
-				sp.location = model.state
-				sp.number = model.number
-				sp.type = model.type == .call ? 0 : 1
-				spammers.append(sp)
+				if let spammer = managedObject as? Spammer {
+					let data = spammerModel[index]
+					spammer.id = Int64(data.id)
+					spammer.location = data.state
+					spammer.number = data.number
+					spammer.type = data.type == .call ? 0 : 1
+				}
+				index += 1
+				return false
 			}
 			
 			do {
-				try ctx.save()
+				try ctx.execute(batchInsert)
 			} catch {
 				print("Error while saving spammer database \(error)")
 			}
-			
 			callback()
 		}
 	}
@@ -164,6 +168,27 @@ class PersistenceController {
 			print("Error while fetching spammer info \(error)")
 		}
 		return spammers
+	}
+	
+	
+	func getManualInputSpammers(limit: Int, callback: @escaping ([Spammer]) -> Void) {
+		
+		container.performBackgroundTask { ctx in
+			let fetchRequest: NSFetchRequest<Spammer> = NSFetchRequest(entityName: "Spammer")
+			fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Spammer.id, ascending: false)]
+			//fetchRequest.predicate = NSPredicate(format: "manual == true")
+			fetchRequest.fetchLimit = limit
+			
+			var spammers: [Spammer] = []
+			
+			do {
+				spammers = try ctx.fetch(fetchRequest)
+			} catch {
+				print("Error while truncating Spammer table \(error)")
+			}
+			
+			callback(spammers)
+		}
 	}
 	
 }

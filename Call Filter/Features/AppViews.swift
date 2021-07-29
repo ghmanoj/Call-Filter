@@ -8,6 +8,28 @@
 import SwiftUI
 
 
+// MARK: - List Item SpammerModel
+struct SpammerItem: View {
+	let item: SpammerModel
+	
+	var body: some View {
+		HStack {
+			VStack(alignment: .leading) {
+				Text("Number: \(item.number)")
+					.font(.headline)
+				Text("Location: \(item.state)")
+					.font(.subheadline)
+			}
+			Spacer(minLength: 0)
+			VStack {
+				Image(systemName: item.type == .call ?  "phone" : "message")
+					.foregroundColor(.red.opacity(0.9))
+			}
+		}
+	}
+}
+
+
 // MARK: - Update Filter Database Card
 struct UpdateFilterDbCard: View {
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
@@ -276,19 +298,7 @@ struct LookupView: View {
 				List {
 					ForEach(viewModel.spammer, id: \.id) { item in
 						//				ForEach(mockDataModel, id: \.id) { item in
-						HStack {
-							VStack(alignment: .leading) {
-								Text("Number: \(item.number)")
-									.font(.headline)
-								Text("Location: \(item.state)")
-									.font(.subheadline)
-							}
-							Spacer(minLength: 0)
-							VStack {
-								Image(systemName: item.type == .call ?  "phone" : "message")
-									.foregroundColor(.red.opacity(0.9))
-							}
-						}
+						SpammerItem(item: item)
 					}
 				}
 			}
@@ -397,7 +407,6 @@ struct AddCustomSpammerView: View {
 					.cornerRadius(10)
 			}
 			
-			
 			HStack(spacing: 20) {
 				Text("Location")
 					.font(.title2)
@@ -433,8 +442,20 @@ struct AddCustomSpammerView: View {
 			}
 			.background(Color.red)
 			.cornerRadius(25)
+			.padding(.bottom)
 			
-			Spacer(minLength: 0)
+			Text("Last ten manual inputs")
+				.font(.title2)
+
+			List {
+				ForEach(viewModel.manualInput, id: \.id) { item in
+					SpammerItem(item: item)
+				}
+			}
+			.onAppear {
+				viewModel.fetchManualInputData()
+			}
+			
 		}
 		.padding()
 		.frame(maxWidth: .infinity, maxHeight: .infinity)

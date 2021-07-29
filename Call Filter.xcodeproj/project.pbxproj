@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AF5108E926A79F6900A63298 /* AppPersistenceModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AF5108E726A79F6900A63298 /* AppPersistenceModel.xcdatamodeld */; };
+		AF413C2D26B2604B00C8E9F6 /* AppPersistenceModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AF413C2B26B2604B00C8E9F6 /* AppPersistenceModel.xcdatamodeld */; };
 		AF5108EB26A7A0F000A63298 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5108EA26A7A0F000A63298 /* Persistence.swift */; };
 		AF5BA6B626B10BDD0033545C /* CustomSpammerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5BA6B526B10BDD0033545C /* CustomSpammerViewModel.swift */; };
 		AF614B8926A2AB5D000D5ACA /* LookupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF614B8826A2AB5D000D5ACA /* LookupViewModel.swift */; };
@@ -28,7 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AF5108E826A79F6900A63298 /* AppPersistenceModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppPersistenceModel.xcdatamodel; sourceTree = "<group>"; };
+		AF413C2C26B2604B00C8E9F6 /* AppPersistenceModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppPersistenceModel.xcdatamodel; sourceTree = "<group>"; };
 		AF5108EA26A7A0F000A63298 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		AF5BA6B526B10BDD0033545C /* CustomSpammerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSpammerViewModel.swift; sourceTree = "<group>"; };
 		AF614B8826A2AB5D000D5ACA /* LookupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookupViewModel.swift; sourceTree = "<group>"; };
@@ -64,6 +64,7 @@
 		AF8CEFF5269FE11D00695129 = {
 			isa = PBXGroup;
 			children = (
+				AF413C2B26B2604B00C8E9F6 /* AppPersistenceModel.xcdatamodeld */,
 				AF8CF000269FE11D00695129 /* Call Filter */,
 				AF8CEFFF269FE11D00695129 /* Products */,
 			);
@@ -80,7 +81,6 @@
 		AF8CF000269FE11D00695129 /* Call Filter */ = {
 			isa = PBXGroup;
 			children = (
-				AF5108E726A79F6900A63298 /* AppPersistenceModel.xcdatamodeld */,
 				AFC8572226A4DA4E00C5F203 /* Data */,
 				AFC8572126A4D9E800C5F203 /* Features */,
 				AFC8572026A4D9E400C5F203 /* Api */,
@@ -214,7 +214,6 @@
 			files = (
 				AF614B8D26A2ABCD000D5ACA /* AppViews.swift in Sources */,
 				AF614B8F26A2B637000D5ACA /* DbUpdateViewModel.swift in Sources */,
-				AF5108E926A79F6900A63298 /* AppPersistenceModel.xcdatamodeld in Sources */,
 				AF5BA6B626B10BDD0033545C /* CustomSpammerViewModel.swift in Sources */,
 				AF68799226A7EBDD0094B300 /* WebService.swift in Sources */,
 				AF5108EB26A7A0F000A63298 /* Persistence.swift in Sources */,
@@ -227,6 +226,7 @@
 				AFA4CEA926A12C3B00752430 /* ViewExt.swift in Sources */,
 				AF614B8926A2AB5D000D5ACA /* LookupViewModel.swift in Sources */,
 				AF8CF002269FE11D00695129 /* CallFilterApp.swift in Sources */,
+				AF413C2D26B2604B00C8E9F6 /* AppPersistenceModel.xcdatamodeld in Sources */,
 				AFD628D826A69F9900FEB3CB /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,12 +418,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		AF5108E726A79F6900A63298 /* AppPersistenceModel.xcdatamodeld */ = {
+		AF413C2B26B2604B00C8E9F6 /* AppPersistenceModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				AF5108E826A79F6900A63298 /* AppPersistenceModel.xcdatamodel */,
+				AF413C2C26B2604B00C8E9F6 /* AppPersistenceModel.xcdatamodel */,
 			);
-			currentVersion = AF5108E826A79F6900A63298 /* AppPersistenceModel.xcdatamodel */;
+			currentVersion = AF413C2C26B2604B00C8E9F6 /* AppPersistenceModel.xcdatamodel */;
 			path = AppPersistenceModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
