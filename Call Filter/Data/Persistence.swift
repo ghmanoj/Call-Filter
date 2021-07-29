@@ -140,6 +140,7 @@ class PersistenceController {
 					spammer.location = data.state
 					spammer.number = data.number
 					spammer.type = data.type == .call ? 0 : 1
+					spammer.manual = data.manual
 				}
 				index += 1
 				return false
@@ -176,17 +177,15 @@ class PersistenceController {
 		container.performBackgroundTask { ctx in
 			let fetchRequest: NSFetchRequest<Spammer> = NSFetchRequest(entityName: "Spammer")
 			fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Spammer.id, ascending: false)]
-			//fetchRequest.predicate = NSPredicate(format: "manual == true")
+			 fetchRequest.predicate = NSPredicate(format: "manual = true")
 			fetchRequest.fetchLimit = limit
-			
+		
 			var spammers: [Spammer] = []
-			
 			do {
 				spammers = try ctx.fetch(fetchRequest)
 			} catch {
 				print("Error while truncating Spammer table \(error)")
 			}
-			
 			callback(spammers)
 		}
 	}

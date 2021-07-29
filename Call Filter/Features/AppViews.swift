@@ -42,7 +42,7 @@ struct UpdateFilterDbCard: View {
 			.repeatForever(autoreverses: false)
 	}
 	
-	@State var updatingImage = "sun.min"
+	@State var updatingImage = "arrow.triangle.2.circlepath"
 	
 	var body: some View {
 		VStack {
@@ -78,7 +78,10 @@ struct UpdateFilterDbCard: View {
 				}
 				
 				Image(systemName: updatingImage)
-					.foregroundColor(.red)
+					.resizable()
+					.aspectRatio(contentMode: .fill)
+					.frame(width: 20, height: 20)
+					.foregroundColor(viewModel.isUpdating ? .primary : .secondary)
 					.rotationEffect(.degrees( (viewModel.isUpdating && viewShowing) ? 360 : 0 ))
 					.animation((viewModel.isUpdating && viewShowing) ? foreverAnimation : .default)
 					.font(.title)
@@ -383,7 +386,6 @@ struct AddCustomSpammerView: View {
 	@EnvironmentObject var viewModel: CustomSpammerViewModel
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
 	
-	
 	@State var number = ""
 	@State var isCallType = false
 	@State var isSmsType = false
@@ -446,7 +448,7 @@ struct AddCustomSpammerView: View {
 			
 			Text("Last ten manual inputs")
 				.font(.title2)
-
+			
 			List {
 				ForEach(viewModel.manualInput, id: \.id) { item in
 					SpammerItem(item: item)

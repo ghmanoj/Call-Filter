@@ -9,7 +9,7 @@ import Foundation
 
 
 class SpamDbApiService {
-	private let apiUrl = "http://filterapi.mghimire.com:8081/latest_spamdb"
+	private let apiUrl = "http://filterapi.mghimire.com:8081/latest_spamdb?size=4096"
 	
 	func fetchData(pageNumber: Int, completion: @escaping (Result<Data, NetworkError>) -> Void) {
 		guard let url = URL(string: apiUrl) else {
