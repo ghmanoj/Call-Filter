@@ -4,7 +4,7 @@
 - [x] Separate UI and View Model
 - [x] Fetch data from real api
 - [x] Add CoreData
-- [ ] Improve phone lookup functionality
+- [x] Improve phone lookup functionality
 - [ ] Add backend services for working with calls and sms
 - [ ] Implementation for persisting filtered call and sms statistics
 
