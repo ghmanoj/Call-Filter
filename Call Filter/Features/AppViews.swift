@@ -394,7 +394,7 @@ struct AddCustomSpammer: View {
 	
 	var body: some View {
 		VStack(alignment: .leading, spacing: 20) {
-			Text("Add Custom Filters")
+			Text("Add Custom Filter")
 				.font(.title)
 				.padding(.bottom, 30)
 				.frame(maxWidth: .infinity, alignment: .leading)
