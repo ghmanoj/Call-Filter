@@ -21,3 +21,12 @@ extension UIApplication {
 		sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
 	}
 }
+
+
+extension View {
+	// for light hepatic feedback when bottom bar buttons are tapped
+	func generateHepaticFeedback(_ strength: UIImpactFeedbackGenerator.FeedbackStyle = .light) {
+		let generator = UIImpactFeedbackGenerator(style: strength)
+		generator.impactOccurred()
+	}
+}

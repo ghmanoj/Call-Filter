@@ -9,11 +9,18 @@ import Foundation
 
 class CustomSpammerViewModel: ObservableObject {
 	@Published var manualInput: [SpammerModel] = []
+	@Published var usStates: [USState] = []
+	@Published var inputNumber = ""
+	@Published var isCallType = false
+	@Published var isSmsType = false
+	@Published var selectedState = ""
+
 	
 	private let persistence = PersistenceController.shared
 
 	init() {
 		fetchManualInputData()
+		usStates = loadUSStatesFromFile()
 	}
 	
 	func fetchManualInputData() {

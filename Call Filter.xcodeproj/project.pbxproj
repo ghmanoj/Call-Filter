@@ -16,6 +16,12 @@
 		AF614B8F26A2B637000D5ACA /* DbUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF614B8E26A2B637000D5ACA /* DbUpdateViewModel.swift */; };
 		AF614B9126A2BB63000D5ACA /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF614B9026A2BB63000D5ACA /* StatisticsViewModel.swift */; };
 		AF68799226A7EBDD0094B300 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF68799126A7EBDD0094B300 /* WebService.swift */; };
+		AF7F2E8E26B3BC4500DA0323 /* USStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7F2E8D26B3BC4500DA0323 /* USStates.swift */; };
+		AF7F2E9126B3BD0800DA0323 /* usa_states.json in Resources */ = {isa = PBXBuildFile; fileRef = AF7F2E9026B3BD0800DA0323 /* usa_states.json */; };
+		AF7F2E9826B3C13A00DA0323 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7F2E9726B3C13A00DA0323 /* SettingsView.swift */; };
+		AF7F2E9A26B3C17900DA0323 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7F2E9926B3C17900DA0323 /* FilterView.swift */; };
+		AF7F2E9C26B3C1C200DA0323 /* CustomFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7F2E9B26B3C1C200DA0323 /* CustomFilterView.swift */; };
+		AF7F2E9E26B3C22F00DA0323 /* LookupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7F2E9D26B3C22F00DA0323 /* LookupView.swift */; };
 		AF8CF002269FE11D00695129 /* CallFilterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8CF001269FE11D00695129 /* CallFilterApp.swift */; };
 		AF8CF004269FE11D00695129 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8CF003269FE11D00695129 /* ContentView.swift */; };
 		AF8CF006269FE11E00695129 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF8CF005269FE11E00695129 /* Assets.xcassets */; };
@@ -37,6 +43,12 @@
 		AF614B8E26A2B637000D5ACA /* DbUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbUpdateViewModel.swift; sourceTree = "<group>"; };
 		AF614B9026A2BB63000D5ACA /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
 		AF68799126A7EBDD0094B300 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		AF7F2E8D26B3BC4500DA0323 /* USStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USStates.swift; sourceTree = "<group>"; };
+		AF7F2E9026B3BD0800DA0323 /* usa_states.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = usa_states.json; sourceTree = "<group>"; };
+		AF7F2E9726B3C13A00DA0323 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AF7F2E9926B3C17900DA0323 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		AF7F2E9B26B3C1C200DA0323 /* CustomFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFilterView.swift; sourceTree = "<group>"; };
+		AF7F2E9D26B3C22F00DA0323 /* LookupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookupView.swift; sourceTree = "<group>"; };
 		AF8CEFFE269FE11D00695129 /* Call Filter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Call Filter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF8CF001269FE11D00695129 /* CallFilterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallFilterApp.swift; sourceTree = "<group>"; };
 		AF8CF003269FE11D00695129 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +73,59 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF7F2E8F26B3BCEF00DA0323 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AF7F2E9026B3BD0800DA0323 /* usa_states.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AF7F2E9226B3C0AC00DA0323 /* Lookup */ = {
+			isa = PBXGroup;
+			children = (
+				AF614B8826A2AB5D000D5ACA /* LookupViewModel.swift */,
+				AF7F2E9D26B3C22F00DA0323 /* LookupView.swift */,
+			);
+			path = Lookup;
+			sourceTree = "<group>";
+		};
+		AF7F2E9326B3C0BA00DA0323 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				AF5BA6B526B10BDD0033545C /* CustomSpammerViewModel.swift */,
+				AF7F2E9B26B3C1C200DA0323 /* CustomFilterView.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		AF7F2E9426B3C0BF00DA0323 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				AF614B9026A2BB63000D5ACA /* StatisticsViewModel.swift */,
+				AF614B8E26A2B637000D5ACA /* DbUpdateViewModel.swift */,
+				AF7F2E9926B3C17900DA0323 /* FilterView.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		AF7F2E9526B3C0C400DA0323 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				AFD628D726A69F9900FEB3CB /* SettingsViewModel.swift */,
+				AF7F2E9726B3C13A00DA0323 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		AF7F2E9626B3C10000DA0323 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				AF614B8C26A2ABCD000D5ACA /* AppViews.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		AF8CEFF5269FE11D00695129 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +146,7 @@
 		AF8CF000269FE11D00695129 /* Call Filter */ = {
 			isa = PBXGroup;
 			children = (
+				AF7F2E8F26B3BCEF00DA0323 /* Resources */,
 				AFC8572226A4DA4E00C5F203 /* Data */,
 				AFC8572126A4D9E800C5F203 /* Features */,
 				AFC8572026A4D9E400C5F203 /* Api */,
@@ -122,13 +188,12 @@
 		AFC8572126A4D9E800C5F203 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				AF7F2E9626B3C10000DA0323 /* Common */,
+				AF7F2E9526B3C0C400DA0323 /* Settings */,
+				AF7F2E9426B3C0BF00DA0323 /* Filter */,
+				AF7F2E9326B3C0BA00DA0323 /* Custom */,
+				AF7F2E9226B3C0AC00DA0323 /* Lookup */,
 				AF8CF003269FE11D00695129 /* ContentView.swift */,
-				AF614B8826A2AB5D000D5ACA /* LookupViewModel.swift */,
-				AF614B8C26A2ABCD000D5ACA /* AppViews.swift */,
-				AF614B8E26A2B637000D5ACA /* DbUpdateViewModel.swift */,
-				AF614B9026A2BB63000D5ACA /* StatisticsViewModel.swift */,
-				AFD628D726A69F9900FEB3CB /* SettingsViewModel.swift */,
-				AF5BA6B526B10BDD0033545C /* CustomSpammerViewModel.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -139,6 +204,7 @@
 				AF614B8A26A2AB9E000D5ACA /* Models.swift */,
 				AFD628D526A699DF00FEB3CB /* LayoutType.swift */,
 				AF5108EA26A7A0F000A63298 /* Persistence.swift */,
+				AF7F2E8D26B3BC4500DA0323 /* USStates.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -200,6 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF7F2E9126B3BD0800DA0323 /* usa_states.json in Resources */,
 				AF8CF009269FE11E00695129 /* Preview Assets.xcassets in Resources */,
 				AF8CF006269FE11E00695129 /* Assets.xcassets in Resources */,
 			);
@@ -215,6 +282,7 @@
 				AF614B8D26A2ABCD000D5ACA /* AppViews.swift in Sources */,
 				AF614B8F26A2B637000D5ACA /* DbUpdateViewModel.swift in Sources */,
 				AF5BA6B626B10BDD0033545C /* CustomSpammerViewModel.swift in Sources */,
+				AF7F2E9826B3C13A00DA0323 /* SettingsView.swift in Sources */,
 				AF68799226A7EBDD0094B300 /* WebService.swift in Sources */,
 				AF5108EB26A7A0F000A63298 /* Persistence.swift in Sources */,
 				AFC8571E26A4AD1C00C5F203 /* SpamDbApiService.swift in Sources */,
@@ -226,7 +294,11 @@
 				AFA4CEA926A12C3B00752430 /* ViewExt.swift in Sources */,
 				AF614B8926A2AB5D000D5ACA /* LookupViewModel.swift in Sources */,
 				AF8CF002269FE11D00695129 /* CallFilterApp.swift in Sources */,
+				AF7F2E9E26B3C22F00DA0323 /* LookupView.swift in Sources */,
 				AF413C2D26B2604B00C8E9F6 /* AppPersistenceModel.xcdatamodeld in Sources */,
+				AF7F2E9A26B3C17900DA0323 /* FilterView.swift in Sources */,
+				AF7F2E9C26B3C1C200DA0323 /* CustomFilterView.swift in Sources */,
+				AF7F2E8E26B3BC4500DA0323 /* USStates.swift in Sources */,
 				AFD628D826A69F9900FEB3CB /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
