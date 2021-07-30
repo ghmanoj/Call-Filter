@@ -381,9 +381,9 @@ struct SettingsView: View {
 	}
 }
 
-// MARK: - Add Custom (user input to spammer db)
-struct AddCustomSpammerView: View {
-	@EnvironmentObject var viewModel: CustomSpammerViewModel
+// MARK: - Add Custom Filter Sheet
+
+struct AddCustomSpammer: View {
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
 	
 	@State var number = ""
@@ -393,11 +393,11 @@ struct AddCustomSpammerView: View {
 	@State var location = ""
 	
 	var body: some View {
-		VStack(alignment: .leading, spacing: 15) {
+		VStack(alignment: .leading, spacing: 20) {
 			Text("Add Custom Filters")
-				.frame(maxWidth: .infinity, alignment: .leading)
 				.font(.title)
 				.padding(.bottom, 30)
+				.frame(maxWidth: .infinity, alignment: .leading)
 			
 			HStack(spacing: 20) {
 				Text("Number")
@@ -431,7 +431,7 @@ struct AddCustomSpammerView: View {
 				}
 				.font(.title2)
 			}
-			.padding(.vertical)
+			
 			
 			Button(action: {
 				print("Saving....")
@@ -446,8 +446,40 @@ struct AddCustomSpammerView: View {
 			.cornerRadius(25)
 			.padding(.bottom)
 			
-			Text("Last ten manual inputs")
-				.font(.title2)
+			Spacer(minLength: 0)
+		}
+		.padding([.vertical, .horizontal], 30)
+	}
+	
+	func getBackground() -> Color {
+		return colorScheme == .dark
+			? Color.white.opacity(0.1)
+			: Color.black.opacity(0.1)
+	}
+}
+
+// MARK: - Custom Spammer View (user input to spammer db)
+struct CustomSpammerView: View {
+	@EnvironmentObject var viewModel: CustomSpammerViewModel
+	@Environment(\.colorScheme) var colorScheme: ColorScheme
+	
+	@State var isFormPresented = false
+	
+	var body: some View {
+		VStack(alignment: .leading, spacing: 15) {
+			HStack(alignment: .center) {
+				Text("Custom Filters")
+					.frame(maxWidth: .infinity, alignment: .leading)
+					.font(.title)
+				
+				Button(action: {
+					isFormPresented.toggle()
+				}) {
+					Text("Add")
+				}
+			}.sheet(isPresented: $isFormPresented) {
+				AddCustomSpammer()
+			}
 			
 			List {
 				ForEach(viewModel.manualInput, id: \.id) { item in
@@ -496,19 +528,19 @@ struct BottomBar: View {
 			
 			
 			VStack {
-				Image(systemName: "plus")
+				Image(systemName: "gauge")
 					.resizable()
 					.aspectRatio(contentMode: .fit)
 					.frame(width: 30, height: 30)
 					.font(.title)
-					.foregroundColor((layoutType == .addcustom) ? .red : .secondary)
+					.foregroundColor((layoutType == .customspammer) ? .red : .secondary)
 					.onTapGesture {
 						generateHepaticFeedback()
 						withAnimation(.easeIn(duration: 0.1)) {
-							layoutType = .addcustom
+							layoutType = .customspammer
 						}
 					}
-				Text("Add")
+				Text("Custom")
 					.font(.callout)
 			}
 			
@@ -534,6 +566,7 @@ struct BottomBar: View {
 			VStack {
 				Image(systemName: "gear")
 					.resizable()
+					.aspectRatio(contentMode: .fit)
 					.frame(width: 30, height: 30)
 					.font(.title)
 					.foregroundColor((layoutType == .settings) ? .red : .secondary)
@@ -557,11 +590,11 @@ struct BottomBar: View {
 }
 
 
-struct AddCustomSpammerView_Previews: PreviewProvider {
+struct CustomSpammerView_Previews: PreviewProvider {
 	@StateObject static var customSpammerViewModel = CustomSpammerViewModel()
 	
 	static var previews: some View {
-		AddCustomSpammerView()
+		CustomSpammerView()
 			.environmentObject(customSpammerViewModel)
 	}
 }

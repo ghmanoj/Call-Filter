@@ -21,8 +21,8 @@ struct ContentView: View {
 					LookupView()
 				case .filter:
 					FilterView()
-				case .addcustom:
-					AddCustomSpammerView()
+				case .customspammer:
+					CustomSpammerView()
 				case .settings:
 					SettingsView()
 			}
