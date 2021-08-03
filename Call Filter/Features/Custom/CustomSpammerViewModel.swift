@@ -19,6 +19,8 @@ class CustomSpammerViewModel: ObservableObject {
 	private let persistence = PersistenceController.shared
 
 	init() {
+		print("CustomSpammerViewModel: Init()")
+		
 		fetchManualInputData()
 		usStates = loadUSStatesFromFile()
 	}

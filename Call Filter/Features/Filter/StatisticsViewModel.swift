@@ -14,6 +14,8 @@ class StatisticsViewModel: ObservableObject {
 	@Published var topLocationStatistics: [SpammerLocation]
 	
 	init() {
+		print("StatisticsViewModel: Init()")
+
 		actionStatistics = ActionsStatistics(calls: 0, sms: 0, blockedPercent: 0)
 		topLocationStatistics = []
 	}

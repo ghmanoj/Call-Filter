@@ -10,8 +10,9 @@ import SwiftUI
 // MARK: - Lookup View
 struct LookupView: View {
 	
+	@ObservedObject var viewModel = ObjectUtils.lookupViewModel
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
-	@EnvironmentObject var viewModel: LookupViewModel
+	
 	
 	@State var searchFieldActive = false
 	

@@ -78,38 +78,3 @@ struct BottomBar: View {
 	}
 	
 }
-
-
-//struct CustomSpammerView_Previews: PreviewProvider {
-//	@StateObject static var customSpammerViewModel = CustomSpammerViewModel()
-//
-//	static var previews: some View {
-//		CustomSpammerView()
-//			.environmentObject(customSpammerViewModel)
-//	}
-//}
-
-//struct LookupView_Previews: PreviewProvider {
-//
-//	@StateObject static var lookupViewModel = LookupViewModel()
-//
-//	static var previews: some View {
-//		LookupView()
-//			.environmentObject(lookupViewModel)
-//	}
-//}
-
-//
-//
-//struct FilterView_Previews: PreviewProvider {
-//	@StateObject static var dbUpdateViewModel = DbUpdateViewModel()
-//	@StateObject static var statisticsViewModel = StatisticsViewModel()
-//	@StateObject static var lookupViewModel = LookupViewModel()
-//
-//	static var previews: some View {
-//		FilterView()
-//			.environmentObject(dbUpdateViewModel)
-//			.environmentObject(statisticsViewModel)
-//			.environmentObject(lookupViewModel)
-//	}
-//}

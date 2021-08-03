@@ -9,21 +9,11 @@ import SwiftUI
 
 @main
 struct CallFilterApp: App {
-	@StateObject var dbUpdateViewModel = DbUpdateViewModel()
-	@StateObject var statisticsViewModel = StatisticsViewModel()
-	@StateObject var lookupViewModel = LookupViewModel()
-	@StateObject var settingsViewModel = SettingsViewModel()
-	@StateObject var customSpammerViewModel = CustomSpammerViewModel()
 	
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
 				.modifier(DarkModeViewModifier())
-				.environmentObject(dbUpdateViewModel)
-				.environmentObject(statisticsViewModel)
-				.environmentObject(lookupViewModel)
-				.environmentObject(settingsViewModel)
-				.environmentObject(customSpammerViewModel)
 		}
 	}
 }

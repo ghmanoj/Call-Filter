@@ -38,6 +38,8 @@ class LookupViewModel: ObservableObject {
 	var phValidationCancellable: AnyCancellable?
 		
 	init() {
+		print("LookupViewModel: Init()")
+
 		phValidationCancellable = isPhoneNumberValidPubliser
 			.sink(receiveValue: { valid in
 				self.showPrompt = !valid
@@ -69,10 +71,4 @@ class LookupViewModel: ObservableObject {
 		}
 	}
 	
-}
-
-extension String {
-	public func toPhoneNumber() -> String {
-		return self.replacingOccurrences(of: "(\\d{3})(\\d{3})(\\d+)", with: "$1-$2-$3", options: .regularExpression, range: nil)
-	}
 }

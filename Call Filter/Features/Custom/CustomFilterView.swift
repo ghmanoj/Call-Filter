@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - Add Custom Filter Sheet
 struct AddCustomSpammer: View {
-	@EnvironmentObject var viewModel: CustomSpammerViewModel
+	@ObservedObject var viewModel = ObjectUtils.customSpammerViewModel
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
 	
 	@State var isCallType = false
@@ -86,7 +86,7 @@ struct AddCustomSpammer: View {
 
 // MARK: - Custom Spammer View (user input to spammer db)
 struct CustomSpammerView: View {
-	@EnvironmentObject var viewModel: CustomSpammerViewModel
+	@ObservedObject var viewModel = CustomSpammerViewModel()
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
 	
 	@State var isFormPresented = false

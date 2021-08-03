@@ -18,6 +18,8 @@ class DbUpdateViewModel: ObservableObject {
 	
 	
 	init() {
+		print("DbUpdateViewModel: Init()")
+
 		updateSpamDbInfo()
 	}
 	

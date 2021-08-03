@@ -14,6 +14,8 @@ class SettingsViewModel: ObservableObject {
 	private let persistence = PersistenceController.shared
 	
 	init() {
+		print("SettingsViewModel: Init()")
+		
 		persistence.getFilterSettings { fs in
 			DispatchQueue.main.async {
 				self.settings = FilterSettingsModel(isCall: fs.call, isMessage: fs.message)

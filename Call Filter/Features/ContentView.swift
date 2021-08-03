@@ -12,7 +12,7 @@ struct ContentView: View {
 	
 	@State var layoutType: LayoutType = .lookup
 	
-	@EnvironmentObject private var viewModel: DbUpdateViewModel
+	@ObservedObject private var viewModel = DbUpdateViewModel()
 	
 	var body: some View {
 		VStack {
@@ -26,11 +26,9 @@ struct ContentView: View {
 				case .settings:
 					SettingsView()
 			}
-
 			BottomBar(layoutType: $layoutType)
-				.onAppear { loadData() }
-			
 		}
+		.onAppear { loadData() }
 	}
 	
 	func loadData() {
@@ -46,20 +44,4 @@ struct ContentView: View {
 		}
 	}
 	
-}
-
-
-struct ContentView_Previews: PreviewProvider {
-	@StateObject static var dbUpdateViewModel = DbUpdateViewModel()
-	@StateObject static var statisticsViewModel = StatisticsViewModel()
-	@StateObject static var lookupViewModel = LookupViewModel()
-	@StateObject static var customSpammerViewModel = CustomSpammerViewModel()
-	
-	static var previews: some View {
-		ContentView()
-			.environmentObject(dbUpdateViewModel)
-			.environmentObject(statisticsViewModel)
-			.environmentObject(lookupViewModel)
-			.environmentObject(customSpammerViewModel)
-	}
 }

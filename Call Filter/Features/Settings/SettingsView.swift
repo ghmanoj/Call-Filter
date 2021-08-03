@@ -14,7 +14,7 @@ struct SettingsView: View {
 	
 	@AppStorage("isDarkMode") var isDarkMode: Bool = true
 	
-	@EnvironmentObject var viewModel: SettingsViewModel
+	@ObservedObject var viewModel = ObjectUtils.settingsViewModel
 	
 	var body: some View {
 		VStack(alignment: .leading) {

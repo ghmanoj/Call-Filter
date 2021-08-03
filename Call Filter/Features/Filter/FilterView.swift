@@ -11,7 +11,7 @@ import SwiftUI
 // MARK: - Update Filter Database Card
 struct UpdateFilterDbCard: View {
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
-	@EnvironmentObject var viewModel: DbUpdateViewModel
+	@ObservedObject var viewModel = ObjectUtils.dbUpdateViewModel
 	
 	@State var viewShowing = false
 	
@@ -102,7 +102,7 @@ struct UpdateFilterDbCard: View {
 struct ActionsStatisticsView: View {
 	
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
-	@EnvironmentObject var viewModel: StatisticsViewModel
+	@ObservedObject var viewModel = ObjectUtils.statisticsViewModel
 	
 	var body: some View {
 		VStack(alignment: .leading, spacing: 15) {
@@ -155,8 +155,8 @@ struct ActionsStatisticsView: View {
 
 // MARK: - Top Location Statistics View (Card)
 struct TopLocationStatisticsView: View {
+	@ObservedObject var viewModel = ObjectUtils.statisticsViewModel
 	@Environment(\.colorScheme) var colorScheme: ColorScheme
-	@EnvironmentObject var viewModel: StatisticsViewModel
 	
 	
 	var body: some View {
